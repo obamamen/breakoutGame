@@ -37,6 +37,11 @@ public class scoremanager : MonoBehaviour
         {
             score++;
         }
+        if (Input.GetKey(KeyCode.R))
+        {
+            PlayerPrefs.SetInt("HighScore", 0);
+            PlayerPrefs.Save();
+        }
 
 
 

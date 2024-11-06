@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
 
     public float initialSpeed = 10f;
     public Transform paddle; 
-    public float randomnessFactor = 0.2f; 
+    public float randomnessFactor = 0.1f; 
 
     private Rigidbody2D rb;
     private bool gameStarted = false;
@@ -24,16 +24,15 @@ public class Ball : MonoBehaviour
 
     public scoremanager scoremanagerobject;
 
+    private TrailRenderer tr;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
 
-
-        //trail = GetComponent<TrailRenderer>();
-
-
+        tr = GetComponent<TrailRenderer>();
 
         ResetBall();
     }
@@ -82,7 +81,7 @@ public class Ball : MonoBehaviour
             direction = direction.normalized;
             //direction.x -= prePaddleInfluence;
             float random = p.hVel * paddleInfluence;
-            prePaddleInfluence = random;
+            //prePaddleInfluence = random;
             direction.x += random;
             direction.x = Mathf.Clamp(direction.x, -0.4f, 0.3f);
             rb.velocity = direction.normalized * initialSpeed;
@@ -94,7 +93,7 @@ public class Ball : MonoBehaviour
             direction = direction.normalized;
             //direction.x -= prePaddleInfluence;
             float random = Random.Range(-randomnessFactor, randomnessFactor);
-            prePaddleInfluence = random;
+            //prePaddleInfluence = random;
             direction.x += random;
             direction.x = Mathf.Clamp(direction.x, -0.4f, 0.4f);
             rb.velocity = direction.normalized * initialSpeed;
@@ -112,7 +111,7 @@ public class Ball : MonoBehaviour
 
     void ResetBall()
     {
-        //trail.Clear();
+        tr.Clear();
         transform.position = new Vector2(paddle.position.x, paddle.position.y + 1.5f);
     }
 }
